@@ -1,0 +1,52 @@
+{
+  "name": "dsh-erp-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Two-way enterprise system (ERP) integration for DeepSeek Harness: signed inbound events, durable outbound delivery, adapters, and approval-gated write-back.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "docs",
+    "mock-erp",
+    "test"
+  ],
+  "scripts": {
+    "test": "node test/unit.test.mjs && node test/e2e.mjs",
+    "test:unit": "node test/unit.test.mjs",
+    "test:e2e": "node test/e2e.mjs",
+    "demo:erp": "node mock-erp/server.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "erp",
+    "integration",
+    "webhook",
+    "kingdee",
+    "odoo"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,38 @@
+# dsh-erp-bridge bundle patch.
+#
+# This is a LOCAL DEMO configuration, not a production profile:
+#   * the ledger lives inside the current workspace;
+#   * ingress binds loopback on 3081 and speaks HMAC-SHA256;
+#   * outbound points at the bundled mock ERP receiver on 3082;
+#   * write-back tools are registered only for purchase_order and every call
+#     still requires an interactive approval.
+#
+# For production, copy this config into your own profile cordis.patch.yml and
+# change dataDir, adapter, outbound.targetUrl, policy.allowWrite and
+# writableEntities. See docs/implementation-plan.md and README.md.
+- insert:
+    - id: dsh-erp-bridge
+      name: 'dsh-erp-bridge'
+      config:
+        dataDir: !!js process.cwd() + '/.dsh-erp-bridge'
+        adapter:
+          id: mock
+        ingress:
+          enabled: true
+          mode: standalone
+          host: 127.0.0.1
+          port: 3081
+          path: /erp/events
+        outbound:
+          enabled: true
+          targetUrl: 'http://127.0.0.1:3082/api/dsh/turn-result'
+          scope: linked
+          includeSummary: true
+        inbound:
+          enabled: true
+          agentPreset: standard
+          permissionPreset: read-only
+        policy:
+          allowWrite: true
+          writableEntities:
+            - purchase_order

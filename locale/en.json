@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "ERP Bridge",
+    "description": "Two-way ERP integration: signed inbound events open read-only sessions, turn results are delivered back with a durable ledger, retries and idempotency, and write-back runs through approval-gated tools."
+  }
+}
